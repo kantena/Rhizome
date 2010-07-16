@@ -1,13 +1,14 @@
 #!/bin/bash
 
 chemin=$PWD
-installation="/home/jluc/.ssh/rhizome/mvc"
+installation=/home/jluc/rhizome/mvc
 
 if  test $1 = "cree" 
 then
        case $2 in
         "modele")
 		echo "création d'un modele: $chemin/app/modele/modele_$3.rb"
+		echo $installation/modeles/modele_debut.rb
                 cp $installation/modeles/modele_debut.rb $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet 
                 echo 'class $3 < Pattern::Observable' >> $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet
                 cp $installation/modeles/modele_fin.rb $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet;; 
