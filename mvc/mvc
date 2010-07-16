@@ -3,33 +3,38 @@
 chemin=$PWD
 installation="/home/jluc/rhizome/mvc"
 
-case $1 in
-"init")
-	mkdir $2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action;; 
-"cree")
-	case $2 in
-	"modele")
-		
-		cp $installation/modeles/modele_debut.rb $chemin/app/modele/modele_$3.rb
-		echo 'class $3 < Pattern::Observable' >> $chemin/app/modele/modele_$3.rb
-		cp $installation/modeles/modele_fin.rb $chemin/app/modele/modele_$3.rb;;
-	"controleur")
+if (( $1=="cree" ))
+then
+       case $2 in
+        "modele")
+
+                cp $installation/modeles/modele_debut.rb $chemin/app/modele/modele_$3.rb
+                echo 'class $3 < Pattern::Observable' >> $chemin/app/modele/modele_$3.rb
+                cp $installation/modeles/modele_fin.rb $chemin/app/modele/modele_$3.rb;;
+        "controleur")
                 cp $installation/modeles/controleur_debut.rb $chemin/app/controleur/controleur_$3.rb
                 echo 'class $3' >> $chemin/app/controleur/controleur_$3.rb
                 cp $installation/modeles/controleur_fin.rb $chemin/app/controleur/controleur_$3.rb;;
 
-	"action")
+        "action")
                 echo 'def $3' >> $chemin/app/action/action_$3.rb
-		echo 'end' >> $chemin/app/action/action_$3.rb;;
-	"vue")
+                echo 'end' >> $chemin/app/action/action_$3.rb;;
+        "vue")
                 cp $installation/modeles/vue_debut.rb $chemin/app/vue/vue_$3.rb
                 echo 'class Vue_$3 < $3' >> $chemin/lib/vue/vue_$3.rb
                 cp $installation/modeles/vue_fin.rb $chemin/app/vue/vue_$3.rb;;
+        *)
+                echo 'erreur de commande';;
+        esac
+
+else
+
+	case $1 in
+	"init")
+		mkdir $2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action;; 
 	*)
-		echo 'erreur de commande';;
-	esac
-*)
-	echo 'aide de commande';;
+		echo 'aide de commande';;
 
 esac
+fi
 
