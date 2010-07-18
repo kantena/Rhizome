@@ -5,38 +5,41 @@ installation=/home/jluc/rhizome/mvc
 
 if  test $1 = "cree" 
 then
-       case $2 in
-        "modele")
-		echo "création d'un modele: $chemin/app/modele/modele_$3.rb"
-		echo $installation/modeles/modele_debut.rb
-                cp $installation/modeles/modele_debut.rb $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet 
-                echo 'class $3 < Pattern::Observable' >> $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet
-                cp $installation/modeles/modele_fin.rb $chemin/app/modele/modele_$3.rb || echo placez a la racine de votre projet;; 
-        "controleur")
-		echo "création d'un controleur: $chemin/app/controleur/controleur_$3.rb" 
-                cp $installation/modeles/controleur_debut.rb $chemin/app/controleur/controleur_$3.rb || echo placez a la racine de votre projet
-                echo 'class $3' >> $chemin/app/controleur/controleur_$3.rb || echo placez a la racine de votre projet
-                cp $installation/modeles/controleur_fin.rb $chemin/app/controleur/controleur_$3.rb || echo placez a la racine de votre projet;;
+if [ -f .racine ]
+then
+case $2 in
+"modele")
+echo "création d'un modele: $chemin/app/modele/modele_$3.rb"
+echo $installation/modeles/modele_debut.rb
+nom=modele;;
 
-        "action")
-		echo "ajout d'une action: $chemin/app/action/action_$3.rb"
-                echo 'def $3' >> $chemin/app/action/action_$3.rb || echo placez a la racine de votre projet
-                echo 'end' >> $chemin/app/action/action_$3.rb || echo placez a la racine de votre projet;;
-        "vue")
-		echo "création d'une vue: $chemin/app/vue/vue_$3.rb"
-                cp $installation/modeles/vue_debut.rb $chemin/app/vue/vue_$3.rb || echo placez a la racine de votre projet
-                echo 'class Vue_$3 < $3' >> $chemin/lib/vue/vue_$3.rb || echo placez a la racine de votre projet
-                cp $installation/modeles/vue_fin.rb $chemin/app/vue/vue_$3.rb || echo placez a la racine de votre projet;;
-        *)
-                echo 'erreur de commande';;
-        esac
+"controleur")
+echo "création d'un controleur: $chemin/app/controleur/controleur_$3.rb" 
+nom=controleur;;
+
+"action")
+echo "ajout d'une action: $chemin/app/action/action_$3.rb"
+nom=action;;
+
+"vue")
+echo "création d'une vue: $chemin/app/vue/vue_$3.rb"
+nom=vue;;
+
+*)
+echo 'erreur de commande';;
+esac
+sed s/"<nom-$nom>"/"$nom_$3"/g $installation/modeles/$nom.rb >> $chemin/app/$nom/$nom_$3.rb
+else
+echo 'vous devez etre a la racine de votre projet pour executer cette commande'
+fi
 
 else
 
 	case $1 in
 	"init")
 		echo "création de l'arborescence" 
-		mkdir $2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action;; 
+		mkdir $2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action
+		touch $2/.racine;;
 	*)
 		echo 'aide de commande';;
 

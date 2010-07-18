@@ -1,0 +1,3 @@
+def <nom-action>
+
+end
