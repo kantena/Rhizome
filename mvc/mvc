@@ -28,16 +28,17 @@ else
     if [ $action = "init" ]
     then
         echo "création de l'arborescence"
-        liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app $complement_ou_nom/app/jar"
-        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action $complement_ou_nom/app/jar/src"
+        liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app $complement_ou_nom/app/vue/jar"
+        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action $complement_ou_nom/app/java"
         liste="$liste $complement_ou_nom/test/vue $complement_ou_nom/test/controleur $complement_ou_nom/test/modele $complement_ou_nom/test/action"
         for doss in $liste
         do
             (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
         done
-        touch $complement_ou_nom/.racine
+        touch .racine
+        cd $complement_ou_nom
     elif [ $action = "copie" ] && ( [ $complement_ou_nom = "jar" ] || [ $complement_ou_nom = "java" ] )
-        cp $nom_composant $chemin/app/vue/$complement_ou_nom/
+    then cp $nom_composant $chemin/app/vue/$complement_ou_nom/
     else
         echo 'aide de commande'
     fi

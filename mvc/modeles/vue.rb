@@ -1,30 +1,35 @@
 require 'java'
 require 'lib/pattern'
-require 'jar/<nom-vue>.jar
-include_class '' # inserer ici le nom de la classe swing
+require 'app/vue/jar/<nom_du_fichier_contenant_la_fenetre_swing>.jar'
+include_class '' #inserer le nom de la classe swing avec son paquetage
 
-class Fen_<nom-vue> < # inserer ici le nom de la classe swing
+class Fen_<nom-vue> < #inserer le nom de la classe swing
   def initialize
-    @visible=true
+    super()
   end
 
   def affiche(resultat)
     resultat
   end
   def visible?
-    @visible
+    self.visible
   end
   def visible! booleen
-    @visible=booleen
+    self.visible=booleen if (booleen == true || booleen == false)
   end
 
 end
 
 class Vue_<nom-vue> < Pattern::InterfaceObserver
-  def initialize fenetre=Fen_<nom-vue>.new
-    @fen = fenetre
+  def initialize controleur
+    @controleur=controleur
+    @fen = fenetre=Fen_<nom-vue>.new
 
   end
+  def set_fenetre fentre
+    @fen=fenetre
+  end
+
   def visible?
     @fen.visible?
   end
