@@ -8,3 +8,5 @@ mvc cree controleur <nom du controleur>
 mvc cree modele <nom du modele>
 mvc cree action <nom de l'action>
 
+la commande "cree" doit être exécutée à la racine du projet
+
