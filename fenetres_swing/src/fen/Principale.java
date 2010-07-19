@@ -38,6 +38,7 @@ public class Principale extends javax.swing.JFrame {
         j_menitem_quitter = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(200, 200));
 
         javax.swing.GroupLayout j_panel_accueilLayout = new javax.swing.GroupLayout(j_panel_accueil);
         j_panel_accueil.setLayout(j_panel_accueilLayout);
@@ -50,7 +51,7 @@ public class Principale extends javax.swing.JFrame {
             .addGap(0, 275, Short.MAX_VALUE)
         );
 
-        j_menu_applis.setText("Applis");
+        j_menu_applis.setText("Modules");
 
         j_sousmenu_applis.setText("Applications");
         j_menu_applis.add(j_sousmenu_applis);

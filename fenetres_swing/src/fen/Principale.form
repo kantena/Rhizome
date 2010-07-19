@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="j_menu_applis">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Applis"/>
+            <Property name="text" type="java.lang.String" value="Modules"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="j_sousmenu_applis">
@@ -30,6 +30,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[200, 200]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="j_menu"/>

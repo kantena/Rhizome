@@ -1,53 +1,42 @@
 #!/bin/bash
 
 chemin=$PWD
-installation=/home/jluc/rhizome/mvc
+installation=/home/kantena/rhizome/mvc
+action=$1
+complement_ou_nom=$2
+nom_composant_a_creer=$3
 
-if  test $1 = "cree" 
+if  test $action = "cree"
 then
-if [ -f .racine ]
-then
-case $2 in
-"modele")
-echo "création d'un modele: $chemin/app/modele/modele_$3.rb"
-echo $installation/modeles/modele_debut.rb
-nom=modele;;
-
-"controleur")
-echo "création d'un controleur: $chemin/app/controleur/controleur_$3.rb" 
-nom=controleur;;
-
-"action")
-echo "ajout d'une action: $chemin/app/action/action_$3.rb"
-nom=action;;
-
-"vue")
-echo "création d'une vue: $chemin/app/vue/vue_$3.rb"
-nom=vue;;
-
-*)
-echo 'erreur de commande';;
-esac
-sed s/"<nom-$nom>"/"$nom_$3"/g $installation/modeles/$nom.rb >> $chemin/app/$nom/$nom_$3.rb
-else
-echo 'vous devez etre a la racine de votre projet pour executer cette commande'
-fi
+    if [ -f .racine ]
+        then
+            if [ $complement_ou_nom != "modele" ] && [ $complement_ou_nom != "vue" ] && [ $complement_ou_nom != "action" ] && [ $complement_ou_nom != "controleur" ]
+                then
+                    echo 'erreur de commande'
+                else
+                    echo "création d'un(e) $complement_ou_nom: $chemin/app/modele/modele_$nom_composant_a_creer.rb"
+                    sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant_a_creer"/g $installation/modeles/$complement_ou_nom.rb >> $chemin/app/$complement_ou_nom/$complement_ou_nom_$nom_composant_a_creer.rb
+               fi
+        else
+            echo 'vous devez être a la racine de votre projet pour executer cette commande'
+        fi
 
 else
 
-	case $1 in
-	"init")
-		echo "création de l'arborescence" 
-		liste="$2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action"
-		for doss in $liste
-		do
-		(mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
-		done
-		
-		touch $2/.racine;;
-	*)
-		echo 'aide de commande';;
+    if [ $action = "init" ]
+    then
+        echo "création de l'arborescence"
+        liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app"
+        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action"
+        for doss in $liste
+        do
+            (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
+        done
 
-esac
+        touch $complement_ou_nom/.racine
+    else
+        echo 'aide de commande'
+
+    fi
 fi
 
