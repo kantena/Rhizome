@@ -38,7 +38,12 @@ else
 	case $1 in
 	"init")
 		echo "création de l'arborescence" 
-		mkdir $2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action
+		liste="$2 $2/lib $2/test $2/scripts $2/app $2/modeles $2/app/vue $2/app/controleur $2/app/modele $2/app/action"
+		for doss in $liste
+		do
+		(mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
+		done
+		
 		touch $2/.racine;;
 	*)
 		echo 'aide de commande';;
