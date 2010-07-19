@@ -1,21 +1,40 @@
 require 'java'
-require 'fenetres/<nom-vue>.jar
-include_class '<nom-class>'
+require 'lib/pattern'
+require 'jar/<nom-vue>.jar
+include_class '' # inserer ici le nom de la classe swing
 
-class Fen_<nom-vue> < <nom-vue>
-	def initialize
-	
-	end
+class Fen_<nom-vue> < # inserer ici le nom de la classe swing
+  def initialize
+    @visible=true
+  end
+
+  def affiche(resultat)
+    resultat
+  end
+  def visible?
+    @visible
+  end
+  def visible! booleen
+    @visible=booleen
+  end
+
 end
 
-class Vue_<nom-vue> < Pattern::Interface_observer
-	def initialize
-		@fen = Fen_<nom-vue>.new
+class Vue_<nom-vue> < Pattern::InterfaceObserver
+  def initialize fenetre=Fen_<nom-vue>.new
+    @fen = fenetre
 
-	end
+  end
+  def visible?
+    @fen.visible?
+  end
+  def visible! booleen
+    @fen.visible! booleen
+  end
 
-	def update
 
-	end
+  def update(modele)
+    @fen.affiche(modele.get_data) if modele.respond_to?("get_data")
+  end
 end
 
