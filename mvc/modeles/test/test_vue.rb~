@@ -1,4 +1,3 @@
-#!/usr/bin/jruby
 require 'test/unit'
 require 'app/vue/<nom-vue>.rb'
 require 'rubygems'

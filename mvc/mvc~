@@ -14,13 +14,10 @@ then
                 then
                     echo 'erreur de commande'
                 else
-                  if [ $complement_ou_nom = "vue" ]
-                  then cp $installation/modeles/pattern.rb $chemin/lib/
-                  fi
                     echo "création d'un(e) $complement_ou_nom: $chemin/app/modele/modele_$nom_composant.rb"
                     sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/$complement_ou_nom.rb >> $chemin/app/$complement_ou_nom/$complement_ou_nom_$nom_composant.rb
                     sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/test/test_$complement_ou_nom.rb >> $chemin/test/$complement_ou_nom/test_$complement_ou_nom_$nom_composant.rb
-                    chmod +x $chemin/test/$complement_ou_nom/test_$complement_ou_nom_$nom_composant.rb
+
                fi
         else
             echo 'vous devez être a la racine de votre projet pour executer cette commande'

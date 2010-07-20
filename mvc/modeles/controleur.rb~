@@ -28,12 +28,10 @@ class Controleur_<nom-controleur>
     @liste.assoc vue
   end
 
-  def vue_visible? vue
-    vue.visible?
+  def vue_visible?
   end
 
-  def vue_visible! vue, etat
-    vue.visible! etat
+  def vue_visible!
   end
 
 
