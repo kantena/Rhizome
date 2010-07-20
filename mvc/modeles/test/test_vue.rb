@@ -8,10 +8,8 @@ require 'mocha'
 #test de la vue
 class Vue_<nom-vue>Test < Test::Unit::TestCase
   def setup
-    controleur=Object.new
-#    controleur.expects(:plus)
-#    controleur.expects(:moins)
-    @vue=Vue_<nom-vue>::new controleur
+    controleur = Object.new
+    @vue = Vue_<nom-vue>::new controleur
 
   end
 

@@ -35,8 +35,8 @@ else
         do
             (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
         done
-        touch .racine
-        cd $complement_ou_nom
+        touch $complement_ou_nom/.racine
+
     elif [ $action = "copie" ] && ( [ $complement_ou_nom = "jar" ] || [ $complement_ou_nom = "java" ] )
     then cp $nom_composant $chemin/app/vue/$complement_ou_nom/
     else

@@ -15,19 +15,19 @@ class Fen_<nom-vue> < #inserer le nom de la classe swing
     self.visible
   end
   def visible! booleen
-    self.visible=booleen if (booleen == true || booleen == false)
+    self.visible = booleen if (booleen == true || booleen == false)
   end
 
 end
 
 class Vue_<nom-vue> < Pattern::InterfaceObserver
   def initialize controleur
-    @controleur=controleur
-    @fen = fenetre=Fen_<nom-vue>.new
+    @controleur = controleur
+    @fen = Fen_<nom-vue>.new
 
   end
   def set_fenetre fentre
-    @fen=fenetre
+    @fen = fenetre
   end
 
   def visible?
