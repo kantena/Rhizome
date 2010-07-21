@@ -1,3 +1,4 @@
+#!/usr/bin/jruby
 require 'test/unit'
 require 'app/vue/<nom-vue>.rb'
 require 'rubygems'
@@ -10,7 +11,6 @@ class Vue_<nom-vue>Test < Test::Unit::TestCase
   def setup
     controleur = Object.new
     @vue = Vue_<nom-vue>::new controleur
-
   end
 
   def test_interface_vue

@@ -10,13 +10,14 @@ class Controleur_<nom-controleur>
 
   def rm_vue vue
     maliste=[]
-    @liste = @liste.inject([]) do |maliste, element|
+    @liste.each do |element|
       if element[0] == vue then
         element[1].rm_observer element[0]
       else
-        maliste << i
+      	      maliste << element
       end
     end
+    @liste = maliste
   end
 
   def get_vues
@@ -27,10 +28,12 @@ class Controleur_<nom-controleur>
     @liste.assoc vue
   end
 
-  def vue_visible?
+  def vue_visible? vue
+    vue.visible?
   end
 
-  def vue_visible!
+  def vue_visible! vue, etat
+    vue.visible! etat
   end
 
 

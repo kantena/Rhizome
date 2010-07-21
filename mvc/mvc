@@ -1,7 +1,7 @@
 #!/bin/bash
 
 chemin=$PWD
-installation=/home/kantena/rhizome/mvc
+. ~/.mvc
 action=$1
 complement_ou_nom=$2
 nom_composant=$3
@@ -14,10 +14,13 @@ then
                 then
                     echo 'erreur de commande'
                 else
+                  if [ $complement_ou_nom = "vue" ]
+                  then cp $installation/modeles/pattern.rb $chemin/lib/
+                  fi
                     echo "création d'un(e) $complement_ou_nom: $chemin/app/modele/modele_$nom_composant.rb"
                     sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/$complement_ou_nom.rb >> $chemin/app/$complement_ou_nom/$complement_ou_nom_$nom_composant.rb
                     sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/test/test_$complement_ou_nom.rb >> $chemin/test/$complement_ou_nom/test_$complement_ou_nom_$nom_composant.rb
-
+                    chmod +x $chemin/test/$complement_ou_nom/test_$complement_ou_nom_$nom_composant.rb
                fi
         else
             echo 'vous devez être a la racine de votre projet pour executer cette commande'
@@ -28,8 +31,8 @@ else
     if [ $action = "init" ]
     then
         echo "création de l'arborescence"
-        liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app $complement_ou_nom/app/vue/jar"
-        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action $complement_ou_nom/app/java"
+        liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app"
+        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/vue/jar $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action $complement_ou_nom/app/java"
         liste="$liste $complement_ou_nom/test/vue $complement_ou_nom/test/controleur $complement_ou_nom/test/modele $complement_ou_nom/test/action"
         for doss in $liste
         do

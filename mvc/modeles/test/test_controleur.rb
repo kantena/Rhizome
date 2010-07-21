@@ -1,3 +1,4 @@
+#!/usr/bin/jruby
 require 'test/unit'
 require 'app/controleur/<nom-controleur>.rb'
 require 'rubygems'
@@ -32,17 +33,17 @@ class Controleur_<nom-controleur>Test < Test::Unit::TestCase
   def test_add_vue
     mavue = mock('vue')
     monmodele = mock('modele')
-    monmodele.expects(:add_observer).returns(true)
-    assert @contro.add_vue mavue, monmodele
+    monmodele.expects(:add_observer).with(mavue).returns(mavue)
+    assert_equal mavue, @contro.add_vue(mavue, monmodele)
     assert_equal [mavue], @contro.get_vues
   end
 
   def test_rm_vue
     mavue = mock('vue')
     monmodele = mock('modele')
-    monmodele.expects(:add_observer).returns(true)
-    monmodele.expects(:rm_observer).returns(true)
-    @contro.add_vue mavue, monmodele
+    monmodele.expects(:add_observer)
+    monmodele.expects(:rm_observer)
+    @contro.add_vue mavue, monmodele   
     @contro.rm_vue mavue
     assert_equal [], @contro.get_vues
   end
@@ -51,9 +52,29 @@ class Controleur_<nom-controleur>Test < Test::Unit::TestCase
     monmodele = mock('modele')
     mavue = mock('vue')
     monmodele.expects(:add_observer).returns(true)
-    assert @contro.add_vue mavue, monmodele
+    assert @contro.add_vue(mavue, monmodele)
     assert_equal [mavue, monmodele], @contro.get_vue_modele(mavue)
 
+  end
+  
+  def test_vue_visible?
+    mavue = mock('vue')
+    mavue.expects(:visible?).returns(true)
+    monmodele = mock('modele')
+    monmodele.expects(:add_observer)
+    @contro.add_vue mavue, monmodele   
+    assert @contro.vue_visible?(mavue)
+  end
+        
+  def test_vue_visible!
+    mavue = mock('vue')
+    mavue.expects(:visible!).with(true).returns(true)
+    mavue.expects(:visible!).with(false).returns(false)
+    monmodele = mock('modele')
+    monmodele.expects(:add_observer)
+    @contro.add_vue mavue, monmodele   
+    assert_equal false, @contro.vue_visible!(mavue, false)
+    assert_equal true, @contro.vue_visible!(mavue, true)
   end
 
 
