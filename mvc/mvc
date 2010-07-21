@@ -40,6 +40,7 @@ else
             (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
         done
         touch $complement_ou_nom/.racine
+        cp $installation/modeles/pattern.rb $chemin/$complement_ou_nom/lib/
 
     elif [ $action = "copie" ] && ( [ $complement_ou_nom = "jar" ] || [ $complement_ou_nom = "java" ] )
     then cp $nom_composant $chemin/app/vue/$complement_ou_nom/

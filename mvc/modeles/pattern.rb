@@ -17,21 +17,22 @@ module Pattern
     end
 
     def add_observer(o)
-  
-      @obs << o if o.respond_to?("update")
- 
+      @obs << o #if o.respond_to?("update") fonctionne pas avec le mock
     end
 
-    def delete_observer(o)
+    def rm_observer(o)
       @obs.delete(o)
     end
+    
     def notify
+      var_pour_test = false
       if self.changed?
-        @obs.each {|o| o.update(self)}
-        self.clear_changed
+        @obs.each {|o| var_pour_test = o.update(self)}
+        self.changed_false
       end
-
+      var_pour_test
     end
+    
     def changed!
       @changed = true
     end
@@ -39,13 +40,17 @@ module Pattern
       @changed
     end
 
-    def clear_changed
+    def changed_false
       @changed = false
     end
 
-    def count_observer
+    def nb_observer
       @obs.length
     end
+    
+    def get_data
+    end
+    
   end
 end
   

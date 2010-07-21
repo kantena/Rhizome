@@ -1,7 +1,7 @@
-require 'Pattern'
+require 'lib/pattern'
 
-class <nom-modele> < Pattern::Observable
+class Modele_<nom-modele> < Pattern::Observable
     def initialize
-
+      super
     end
 end
