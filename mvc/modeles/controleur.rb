@@ -9,6 +9,7 @@ class Controleur_<nom-controleur>
   end
 
   def rm_vue vue
+    maliste=[]
     @liste = @liste.inject([]) do |maliste, element|
       if element[0] == vue then
         element[1].rm_observer element[0]
