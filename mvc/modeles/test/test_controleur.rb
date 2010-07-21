@@ -12,69 +12,54 @@ class Controleur_<nom-controleur>Test < Test::Unit::TestCase
 
   def test_interface
     assert true
-    assert_equal true, @contro.respond_to?("add_vue")
-    assert_equal true, @contro.respond_to?("rm_vue")
-    assert_equal true, @contro.respond_to?("get_vues")
-    assert_equal true, @contro.respond_to?("get_vue_modele")
-    assert_equal true, @contro.respond_to?("vue_visible?")
-    assert_equal true, @contro.respond_to?("vue_visible!")
+    assert_equal true, @contro.respond_to?("ajouter_vue")
+    assert_equal true, @contro.respond_to?("retirer_vue")
+    assert_equal true, @contro.respond_to?("lire_vues")
+    assert_equal true, @contro.respond_to?("lire_vue_modele")
   end
-
-  def test_get_vues
+ 
+  def test_lire_vues
     def @contro.set_liste obj
       @liste = obj
     end
     monmodele = mock('modele')
     mavue = mock('vue')
     @contro.set_liste [ [mavue, monmodele] ]
-    assert_equal [ mavue ], @contro.get_vues
+    assert_equal [ mavue ], @contro.lire_vues
+    @contro.set_liste [ [mavue, monmodele], [mavue, monmodele] ]
+    assert_equal [ mavue, mavue ], @contro.lire_vues
   end
 
-  def test_add_vue
+  def test_ajouter_vue
     mavue = mock('vue')
     monmodele = mock('modele')
     monmodele.expects(:add_observer).with(mavue).returns(mavue)
-    assert_equal mavue, @contro.add_vue(mavue, monmodele)
-    assert_equal [mavue], @contro.get_vues
+    assert_equal mavue, @contro.ajouter_vue(mavue, monmodele)
+    assert_equal [mavue], @contro.lire_vues
   end
 
-  def test_rm_vue
+  def test_retirer_vue
     mavue = mock('vue')
     monmodele = mock('modele')
     monmodele.expects(:add_observer)
     monmodele.expects(:rm_observer)
-    @contro.add_vue mavue, monmodele   
-    @contro.rm_vue mavue
-    assert_equal [], @contro.get_vues
+    @contro.ajouter_vue mavue, monmodele   
+    @contro.retirer_vue mavue
+    assert_equal [], @contro.lire_vues
   end
 
-  def test_get_vue_modele
+  def test_lire_vue_modele
     monmodele = mock('modele')
     mavue = mock('vue')
     monmodele.expects(:add_observer).returns(true)
-    assert @contro.add_vue(mavue, monmodele)
-    assert_equal [mavue, monmodele], @contro.get_vue_modele(mavue)
-
+    assert @contro.ajouter_vue(mavue, monmodele)
+    assert_equal [mavue, monmodele], @contro.lire_vue_modele(mavue)
   end
   
-  def test_vue_visible?
+  def test_lire_vue_modele_sans_vue_et_modele
     mavue = mock('vue')
-    mavue.expects(:visible?).returns(true)
-    monmodele = mock('modele')
-    monmodele.expects(:add_observer)
-    @contro.add_vue mavue, monmodele   
-    assert @contro.vue_visible?(mavue)
-  end
-        
-  def test_vue_visible!
-    mavue = mock('vue')
-    mavue.expects(:visible!).with(true).returns(true)
-    mavue.expects(:visible!).with(false).returns(false)
-    monmodele = mock('modele')
-    monmodele.expects(:add_observer)
-    @contro.add_vue mavue, monmodele   
-    assert_equal false, @contro.vue_visible!(mavue, false)
-    assert_equal true, @contro.vue_visible!(mavue, true)
+    assert_equal [], @contro.lire_vue_modele(mavue)
+  
   end
 
 

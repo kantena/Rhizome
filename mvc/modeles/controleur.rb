@@ -3,12 +3,12 @@ class Controleur_<nom-controleur>
     @liste=[]
   end
 
-  def add_vue vue, modele
+  def ajouter_vue vue, modele
     @liste << [vue, modele]
     modele.add_observer(vue)
   end
-
-  def rm_vue vue
+ 
+  def retirer_vue vue
     maliste=[]
     @liste.each do |element|
       if element[0] == vue then
@@ -19,22 +19,17 @@ class Controleur_<nom-controleur>
     end
     @liste = maliste
   end
-
-  def get_vues
+ 
+  def lire_vues
     @liste.map { |element| element[0] }
   end
 
-  def get_vue_modele vue
-    @liste.assoc vue
+  def lire_vue_modele vue
+    resultat = @liste.assoc(vue)
+    resultat = [] if resultat == nil
+    resultat
   end
 
-  def vue_visible? vue
-    vue.visible?
-  end
-
-  def vue_visible! vue, etat
-    vue.visible! etat
-  end
 
 
 end
