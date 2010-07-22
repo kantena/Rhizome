@@ -25,12 +25,10 @@ module Pattern
     end
     
     def notify
-      var_pour_test = false
       if self.changed?
-        @obs.each {|o| var_pour_test = o.update(self)}
+        @obs.each {|o| o.update(self)}
         self.changed_false
       end
-      var_pour_test
     end
     
     def changed!

@@ -2,11 +2,13 @@ lanceur d'applications décentralisées avec tampon à la façon java web start
 
 
 fonctionnement de mvc
-mvc init <nom de l'appli>  		creer l'arborescence de l'appli
-mvc cree vue <nom de la vue> 		utiliser le nom de l'archive jar de la fenetre
-mvc cree controleur <nom du controleur>
-mvc cree modele <nom du modele>
-mvc cree action <nom de l'action>
+  mvc init <nom de l'appli>  		creer l'arborescence de l'appli
+  mvc cree vue <nom de la vue> 		utiliser le nom de l'archive jar de la fenetre
+  mvc cree controleur <nom du controleur>
+  mvc cree modele <nom du modele>
+  mvc cree action <nom de l'action>
+  mvc copie jar <nom du .jar>
+  mvc copie java <nom du .java>
 
-la commande "cree" doit être exécutée à la racine du projet
+Mis à part la commande "init" toutes les commandes doivent être exécutées à la racine du projet
 

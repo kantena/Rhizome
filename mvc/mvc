@@ -33,8 +33,8 @@ else
     then
         echo "création de l'arborescence"
         liste="$complement_ou_nom $complement_ou_nom/lib $complement_ou_nom/test $complement_ou_nom/scripts $complement_ou_nom/app"
-        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/vue/jar $complement_ou_nom/app/controleur $complement_ou_nom/app/modele $complement_ou_nom/app/action $complement_ou_nom/app/java"
-        liste="$liste $complement_ou_nom/test/vue $complement_ou_nom/test/controleur $complement_ou_nom/test/modele $complement_ou_nom/test/action"
+        liste="$liste $complement_ou_nom/app/vue $complement_ou_nom/app/vue/java $complement_ou_nom/app/vue/jar $complement_ou_nom/app/controleur $complement_ou_nom/app/modele"
+        liste="$liste $complement_ou_nom/app/action $complement_ou_nom/test/vue $complement_ou_nom/test/controleur $complement_ou_nom/test/modele $complement_ou_nom/test/action"
         for doss in $liste
         do
             (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
