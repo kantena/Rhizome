@@ -7,61 +7,54 @@ require 'mocha'
 class Controleur_pivotTest < Test::Unit::TestCase
   def setup
     @contro = Controleur_pivot.new
-
   end
 
   def test_interface
     assert true
-    assert_equal true, @contro.respond_to?("ajouter_vue")
-    assert_equal true, @contro.respond_to?("retirer_vue")
-    assert_equal true, @contro.respond_to?("lire_vues")
-    assert_equal true, @contro.respond_to?("lire_vue_modele")
+    assert_equal true, @contro.respond_to?("add_view")
+    assert_equal true, @contro.respond_to?("delete_view")
+    assert_equal true, @contro.respond_to?("get_views")
+    assert_equal true, @contro.respond_to?("get_view_model")
+    assert_equal true, @contro.respond_to?("do_it!")
   end
  
-  def test_lire_vues
-    def @contro.set_liste obj
-      @liste = obj
-    end
-    monmodele = mock('modele')
+  def test_add_view_et_get_views_et_get_view_model
     mavue = mock('vue')
-    @contro.set_liste [ [mavue, monmodele] ]
-    assert_equal [ mavue ], @contro.lire_vues
-    @contro.set_liste [ [mavue, monmodele], [mavue, monmodele] ]
-    assert_equal [ mavue, mavue ], @contro.lire_vues
+    monmodele = mock('modele')
+    monmodele.expects(:add_observer).once
+    @contro.add_view mavue, monmodele
+    assert_equal [ mavue ], @contro.get_views
+    assert_equal [mavue, monmodele], @contro.get_view_model(mavue)
   end
 
-  def test_ajouter_vue
-    mavue = mock('vue')
-    monmodele = mock('modele')
-    monmodele.expects(:add_observer).with(mavue).returns(mavue)
-    assert_equal mavue, @contro.ajouter_vue(mavue, monmodele)
-    assert_equal [mavue], @contro.lire_vues
+  def test_delete_view
+    mavue = @contro.get_views[0]
+    monmodele = @contro.get_view_model(mavue)[1]
+    monmodele.expects(:delete_observer).once
+    @contro.delete_view mavue
+    assert_equal [], @contro.get_views
   end
 
-  def test_retirer_vue
-    mavue = mock('vue')
-    monmodele = mock('modele')
-    monmodele.expects(:add_observer)
-    monmodele.expects(:rm_observer)
-    @contro.ajouter_vue mavue, monmodele   
-    @contro.retirer_vue mavue
-    assert_equal [], @contro.lire_vues
-  end
 
-  def test_lire_vue_modele
-    monmodele = mock('modele')
-    mavue = mock('vue')
-    monmodele.expects(:add_observer).returns(true)
-    assert @contro.ajouter_vue(mavue, monmodele)
-    assert_equal [mavue, monmodele], @contro.lire_vue_modele(mavue)
-  end
   
-  def test_lire_vue_modele_sans_vue_et_modele
+  def test_get_view_model_sans_vue_et_modele
     mavue = mock('vue')
-    assert_equal [], @contro.lire_vue_modele(mavue)
+    assert_equal [], @contro.get_view_model(mavue)
   
   end
-
+  
+  def test_do_it!
+    mavue = mock('vue')
+    monmodele = mock('modele')
+    monmodele.expects(:add_observer).once
+    @contro.add_view mavue, monmodele
+    
+    @contro.expects(:coucou).once
+    @contro.do_it!(mavue, :coucou)
+    monmodele.expects(:do_it!).with(:bidon)
+    @contro.do_it!(mavue, :bidon)
+    
+  end
 
 
 end

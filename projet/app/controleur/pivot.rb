@@ -1,35 +1,42 @@
+
+
 class Controleur_pivot
+@@liste=[]
   def initialize
-    @liste=[]
+  
   end
 
-  def ajouter_vue vue, modele
-    @liste << [vue, modele]
-    modele.add_observer(vue)
+  def add_view vue, modele
+    @@liste << [vue, modele]
+    modele.add_observer vue
   end
  
-  def retirer_vue vue
+  def delete_view vue
     maliste=[]
-    @liste.each do |element|
+    @@liste.each do |element|
       if element[0] == vue then
-        element[1].rm_observer element[0]
+        element[1].delete_observer element[0]
       else
       	      maliste << element
       end
     end
-    @liste = maliste
+    @@liste = maliste
   end
  
-  def lire_vues
-    @liste.map { |element| element[0] }
+  def get_views
+    @@liste.map { |element| element[0] }
   end
 
-  def lire_vue_modele vue
-    resultat = @liste.assoc(vue)
+  def get_view_model vue
+    resultat = @@liste.assoc(vue)
     resultat = [] if resultat == nil
     resultat
   end
 
+  def do_it!(expediteur, *arg)
+    return self.send(*arg) if self.respond_to?(arg[0])
+    self.get_view_model(expediteur)[1].do_it!(*arg) 
+  end
 
 
 end

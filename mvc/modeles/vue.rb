@@ -1,11 +1,11 @@
 require 'java'
-require 'lib/pattern'
-require 'app/vue/jar/<nom_du_fichier_contenant_la_fenetre_swing>.jar'
-include_class '' #inserer le nom de la classe swing avec son paquetage
+require 'app/vue/jar/vue3.jar' #Inserer ici le fichier jar de la fenetre
+include_class 'fen.Vue_swing' #Inserer ici la classe de la fenetre
 
-class Fen_<nom-vue> < #inserer le nom de la classe swing
+class Fen_<nom-vue> < Vue_swing #Inserer ici la classe de la fenetre
   def initialize
     super()
+    self.visible =false
   end
 
   def affiche(resultat)
@@ -15,31 +15,19 @@ class Fen_<nom-vue> < #inserer le nom de la classe swing
     self.visible
   end
   def visible! booleen
-    self.visible = booleen if (booleen == true || booleen == false)
+    self.visible = booleen 
   end
 
 end
 
-class Vue_<nom-vue> < Pattern::InterfaceObserver
-  def initialize controleur
+class Vue_<nom-vue> < MVC::Vue_mvc
+  def initialize controleur, fenetre=Fen_<nom-vue>.new
     @controleur = controleur
-    @fen = Fen_<nom-vue>.new
-
-  end
-  def set_fenetre fentre
     @fen = fenetre
   end
-
-  def visible?
-    @fen.visible?
-  end
-  def visible! booleen
-    @fen.visible! booleen
-  end
-
-
-  def update(modele)
-    @fen.affiche(modele.get_data) if modele.respond_to?("get_data")
-  end
+  # Implementer ici les actions dont le champs d'application ne sort pas de la
+  # vue et n'ont donc pas a consulter les données du modèle.
+  
+  
 end
 
