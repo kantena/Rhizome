@@ -36,8 +36,11 @@ module Mvc
   def do_it!(expediteur, *arg)
     retour = true
     retour = self.send(*arg) if self.respond_to?(arg[0])
-    self.get_view_model(expediteur)[1].do_it!(*arg) if retour 
+    modele = get_view_model(expediteur)[1]
+    modele.do_it!(*arg) if retour
   end
+
+  
 end
 
 ###########################     Modele        ##################################
@@ -49,7 +52,7 @@ class Modele_mvc
     end
     
     def do_it! *arg
-      return self.send(*arg) if self.respond_to?(arg[0])
+      self.send(*arg) if self.respond_to?(arg[0])
     end
 end
 
@@ -71,9 +74,12 @@ class Vue_mvc
 
   
   def do_it! *arg
-    return self.send(*arg) if self.respond_to?(arg[0])
-    @controleur.do_it! self, *arg
+    retour = true
+    retour = self.send(*arg) if self.respond_to?(arg[0])
+    @controleur.do_it! self, *arg if retour
+  end
+
   end
 end
 
-end
+
