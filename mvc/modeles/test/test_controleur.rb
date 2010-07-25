@@ -1,12 +1,12 @@
 #!/usr/bin/jruby
 require 'test/unit'
-require 'app/controleur/<nom-controleur>.rb'
+require 'app/controleur/coucou.controleur.rb'
 require 'rubygems'
 require 'mocha'
 
-class Controleur_<nom-controleur>Test < Test::Unit::TestCase
+class Controleur_coucouTest < Test::Unit::TestCase
   def setup
-    @contro = Controleur_<nom-controleur>.new
+    @contro = Controleur_coucou.new
   end
 
   def test_interface

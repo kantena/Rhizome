@@ -3,6 +3,13 @@
 chemin=$PWD
 . ~/.mvc
 action=$1
+if [ $2 = "all" ]
+then
+  creations="vue controleur modele"
+else
+  creations=$2
+fi
+
 complement_ou_nom=$2
 nom_composant=$3
 
@@ -10,18 +17,18 @@ if  test $action = "cree"
 then
     if [ -f .racine ]
         then
-            if [ $complement_ou_nom != "modele" ] && [ $complement_ou_nom != "vue" ] && [ $complement_ou_nom != "action" ] && [ $complement_ou_nom != "controleur" ]
+            if [ $complement_ou_nom != "all" ] &&[ $complement_ou_nom != "modele" ] && [ $complement_ou_nom != "vue" ] && [ $complement_ou_nom != "action" ] && [ $complement_ou_nom != "controleur" ]
                 then
                     echo 'erreur de commande'
                 else
-                  if [ $complement_ou_nom = "vue" ]
-                  then cp $installation/modeles/pattern.rb $chemin/lib/
-                  fi
-                    echo "création d'un fichier $complement_ou_nom: $chemin/app/$complement_ou_nom/$complement_ou_nom_$nom_composant.rb"
-                    sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/$complement_ou_nom.rb >> $chemin/app/$complement_ou_nom/$complement_ou_nom_$nom_composant.rb
-                    echo "création d'un test pour $complement_ou_nom: $chemin/test/$complement_ou_nom/$nom_composant.$complement_ou_nom.test.rb"
-                    sed s/"<nom-$complement_ou_nom>"/"$complement_ou_nom_$nom_composant"/g $installation/modeles/test/test_$complement_ou_nom.rb >> $chemin/test/$complement_ou_nom/$nom_composant.$complement_ou_nom.test.rb
-                    chmod +x $chemin/test/$complement_ou_nom/$nom_composant.$complement_ou_nom.test.rb
+                  for element in $creations
+                  do
+                    echo "création d'un fichier $element: $chemin/app/$element/$element.$nom_composant.rb"
+                    sed s/"<nom-$element>"/"$element_$nom_composant"/g $installation/modeles/$element.rb >> $chemin/app/$element/$nom_composant.$element.rb
+                    echo "création d'un test pour $creations: $chemin/test/$creations/$nom_composant.$creations.test.rb"
+                    sed s/"<nom-$element>"/"$element_$nom_composant"/g $installation/modeles/test/test_$element.rb >> $chemin/test/$element/$nom_composant.$element.test.rb
+                    chmod +x $chemin/test/$element/$nom_composant.$element.test.rb
+                  done
                fi
         else
             echo 'vous devez être a la racine de votre projet pour executer cette commande'
@@ -40,7 +47,7 @@ else
             (mkdir $doss && echo Création de $doss) || echo Erreur lors de la création de $doss
         done
         touch $complement_ou_nom/.racine
-        cp $installation/modeles/pattern.rb $chemin/$complement_ou_nom/lib/
+        cp $installation/modeles/lib/* $chemin/$complement_ou_nom/lib/
 
     elif [ $action = "copie" ] && ( [ $complement_ou_nom = "jar" ] || [ $complement_ou_nom = "java" ] )
     then cp $nom_composant $chemin/app/vue/$complement_ou_nom/

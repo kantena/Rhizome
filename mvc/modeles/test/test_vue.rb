@@ -1,6 +1,6 @@
 #!/usr/bin/jruby
 require 'test/unit'
-require 'app/vue/<nom-vue>.rb'
+require 'app/vue/<nom-vue>.vue.rb'
 require 'rubygems'
 require 'mocha'
 
@@ -52,9 +52,9 @@ class Vue_<nom-vue>Test < Test::Unit::TestCase
   end
   
     def test_do_it!
-      @vue.expects(:coucou).once
-      @vue.do_it!(:coucou)
-      @controleur.expects(:do_it!).with(:bidon)
+      @vue.expects(:visible?).with().once
+      @vue.do_it!(:visible?)
+      @controleur.expects(:do_it!).with(@vue, :bidon)
       @vue.do_it!(:bidon)
     
   end

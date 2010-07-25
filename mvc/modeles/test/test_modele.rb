@@ -1,6 +1,6 @@
 #!/usr/bin/jruby
 require 'test/unit'
-require 'app/modele/<nom-modele>.rb'
+require 'app/modele/<nom-modele>.modele.rb'
 require 'rubygems'
 require 'mocha'
 
