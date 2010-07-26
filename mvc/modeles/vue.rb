@@ -1,4 +1,4 @@
-require 'lib/mvc_framework'
+require 'mvc_framework'
 require 'java'
 require 'jar/vue3.jar' #<--Inserer ici le fichier jar de la fenetre
 include_class 'fen.Vue_swing' #<--Inserer ici la classe de la fenetre
@@ -19,7 +19,7 @@ class Fen_<nom-vue> < Vue_swing #<--Inserer ici la classe de la fenetre
     self.visible
   end
   def visible! booleen
-    self.visible = booleen 
+    self.visible = booleen
   end
 
 end
@@ -35,7 +35,7 @@ class Vue_<nom-vue> < Mvc::Vue_mvc
   end
   # Implementer ici les actions dont le champs d'application ne sort pas de la
   # vue et n'ont donc pas a consulter les données du modèle.
-  
-  
+
+
 end
 
