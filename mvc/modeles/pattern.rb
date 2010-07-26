@@ -3,12 +3,6 @@
 
 
 module Pattern
-  class InterfaceObserver
-    def update(qui)
-
-    end
-  end
-
   class Observable
 
     def initialize
@@ -17,7 +11,7 @@ module Pattern
     end
 
     def add_observer(o)
-      @obs << o #if o.respond_to?("update") fonctionne pas avec le mock
+      @obs << o 
     end
 
     def rm_observer(o)

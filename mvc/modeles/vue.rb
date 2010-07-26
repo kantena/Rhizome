@@ -1,10 +1,9 @@
 require 'java'
-require 'lib/pattern'
 require 'app/vue/jar/<nom_du_fichier_contenant_la_fenetre_swing>.jar'
 include_class '' #inserer le nom de la classe swing avec son paquetage
 
 class Fen_<nom-vue> < #inserer le nom de la classe swing
-  def initialize
+    def initialize micro_c = Vue_<nom-vue>.new
     super()
   end
 
@@ -15,15 +14,15 @@ class Fen_<nom-vue> < #inserer le nom de la classe swing
     self.visible
   end
   def visible! booleen
-    self.visible = booleen if (booleen == true || booleen == false)
+    self.visible = booleen
   end
 
 end
 
-class Vue_<nom-vue> < Pattern::InterfaceObserver
+class Vue_<nom-vue>
   def initialize controleur
     @controleur = controleur
-    @fen = Fen_<nom-vue>.new
+    @fen = Fen_<nom-vue>.new self
 
   end
   def set_fenetre fentre
@@ -39,7 +38,7 @@ class Vue_<nom-vue> < Pattern::InterfaceObserver
 
 
   def update(modele)
-    @fen.affiche(modele.get_data) if modele.respond_to?("get_data")
+    @fen.affiche(modele.get_data)
   end
 end
 
