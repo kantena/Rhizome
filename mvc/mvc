@@ -3,12 +3,6 @@
 chemin=$PWD
 . ~/.mvc
 action=$1
-if [ $2 = "all" ]
-then
-  creations="vue controleur modele"
-else
-  creations=$2
-fi
 
 complement_ou_nom=$2
 nom_composant=$3
@@ -21,6 +15,13 @@ then
                 then
                     echo 'erreur de commande'
                 else
+                  if [ $2 = "all" ]
+                  then
+                    creations="vue controleur modele"
+                  else
+                    creations=$2
+                  fi
+
                   for element in $creations
                   do
                     echo "création d'un fichier $element: $chemin/app/$element/$element.$nom_composant.rb"
@@ -48,9 +49,24 @@ else
         done
         touch $complement_ou_nom/.racine
         cp $installation/modeles/lib/* $chemin/$complement_ou_nom/lib/
+        
 
     elif [ $action = "copie" ] && ( [ $complement_ou_nom = "jar" ] || [ $complement_ou_nom = "java" ] )
     then cp $nom_composant $chemin/app/vue/$complement_ou_nom/
+    elif [ $action = "jar" ]
+    then
+      rm -r monbuild
+      mkdir monbuild
+      mkdir monbuild/lib
+      cp $installation/lib/jruby-complete.jar monbuild/lib/
+      cp $installation/lib/MANIFEST.MF monbuild/
+      cp app/*/*.rb monbuild/
+      cp lib/* monbuild/
+      cp -R app/vue/jar monbuild/
+      cd monbuild
+      javac -cp ./lib/jruby-complete.jar Main.java
+      rm Main.java
+      jar cvfm coucou.jar MANIFEST.MF *.rb *.class jar/
     else
         echo 'aide de commande'
     fi
