@@ -1,0 +1,13 @@
+require 'test/unit'
+#require 'rubygems'
+#require 'mocha'
+
+
+
+class NavigationControllerTest < Test::Unit::TestCase
+  def setup
+    
+    
+  end
+  
+end

@@ -12,6 +12,9 @@ class Controleur_lanceur < Mvc::Controleur_mvc
 
   def btn_quitter_click
     puts 'menu_quitter à été cliqué'
+    test_actifs = [RhizomeModule.new("Premier Module", "Ma description pour voir un peu", 'PremierMain'),  
+    RhizomeModule.new("Troisième Module", "Et là on fait des petit truc tranquillement", 'TroisiemeMain'),]
+    @vue.affiche_liste_module test_actifs 
   end
   
 
