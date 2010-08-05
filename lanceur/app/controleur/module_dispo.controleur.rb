@@ -10,7 +10,11 @@ class Module_dispo_controleur
     @@controleur = Module_dispo_controleur.new 
     return
     end
-    @vue.set_visible true
+
     
+  end
+  
+  def fermeture
+    @@controleur = false
   end
 end

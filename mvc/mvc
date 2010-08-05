@@ -60,13 +60,18 @@ else
       mkdir monbuild/lib
       cp $installation/lib/jruby-complete.jar monbuild/lib/
       cp $installation/lib/MANIFEST.MF monbuild/
-      cp app/*/*.rb monbuild/
+      cp *.rb monbuild
+      cp -R app monbuild/
       cp lib/* monbuild/
-      cp -R app/vue/jar monbuild/
+      #cp -R app/vue/jar monbuild/lib
+      cp -R modules monbuild/lib
       cd monbuild
       javac -cp ./lib/jruby-complete.jar Main.java
       rm Main.java
-      jar cvfm coucou.jar MANIFEST.MF *.rb *.class jar/
+      rm app/vue/*~
+      rm app/controleur/*~
+      rm app/modele/*~
+      jar cvfm coucou.jar MANIFEST.MF *.rb *.class app/
     else
         echo 'aide de commande'
     fi
