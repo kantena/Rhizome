@@ -1,7 +1,6 @@
-require 'test/unit'
-require 'rubygems'
-require 'mocha'
 require 'chemins'
+require 'test/unit'
+require 'mocha'
 
 
 
