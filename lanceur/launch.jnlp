@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp codebase="" href="http://www.chez-andrei.fr/java/launch.jnlp" spec="1.0+">
+    <information>
+        <title>Rhizome</title>
+        <vendor>jluc</vendor>
+        <description>Projet de stage Rhizome</description>
+
+    </information>
+    <update check="always"/>
+    <security>
+       <all-permissions/>
+    </security>
+
+    <resources>
+      <j2se version="1.5+"/>
+      <jar href="http://www.chez-andrei.fr/java/coucou.jar"/>
+      <jar href="http://www.chez-andrei.fr/java/lib/jruby-complete.jar"/>
+      <jar href="http://www.chez-andrei.fr/java/lib/rhizome.jar"/>
+    </resources>
+  <application-desc main-class="Main" />
+</jnlp>
+

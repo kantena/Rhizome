@@ -1,4 +1,5 @@
 include_class 'fen.Liste_dispo'
+
 class Liste_module_dispo_Vue < Liste_dispo
   def initialize contro, liste
     super()
@@ -8,7 +9,9 @@ class Liste_module_dispo_Vue < Liste_dispo
     scp_liste.setViewportView self.panel
     self.panel.set_layout  javax.swing.BoxLayout.new(self.panel, 1)
     liste.each do |module_dispo| 
-      self.panel.add(Module_dispo_vue.new(@controleur, module_dispo))
+      
+      self.panel.add(e = Module_dispo_vue.new(@controleur, module_dispo))
+      module_dispo.add_obs e
     end    
    self.panel.revalidate
  

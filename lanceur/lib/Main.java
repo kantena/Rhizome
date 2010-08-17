@@ -1,5 +1,5 @@
 
-public class Main {
+class Main {
 
     /**
      * @param args the command line arguments
@@ -8,3 +8,4 @@ public class Main {
         org.jruby.Main.main(new String[]{"-e require 'main.rb'"});
     }
 }
+

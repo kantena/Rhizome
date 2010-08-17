@@ -1,15 +1,23 @@
-class RhizomeModule
-  attr_reader :titre, :description, :action
-   
-  def initialize titre, description, start_action 
-    @titre = titre
-    @action = start_action
-    @description = description
-  end
 
-  def self.actifs
-    [RhizomeModule.new("Premier Module", "Ma description pour voir un peu", 'PremierMain'), 
-    RhizomeModule.new("Second Module", "Et là voilà ce qu'il se passe...", 'SecondMain'), 
-    RhizomeModule.new("Troisième Module", "Et là on fait des petit truc tranquillement", 'TroisiemeMain'),]
+class RhizomeModule < ActiveRecord::Base
+  conf_fic = "/home/kantena/rhizome/lanceur/config/base.yml"
+  establish_connection(YAML::load(File.open(conf_fic))['RhizomeModule'])
+  include ObservableClasse
+
+  named_scope :actifs, :conditions => {:actif, true}
+  named_scope :disponibles
+  
+  def after_save
+    obs_change true
+    notif_tous self
+  end
+  
+  def change_install valeur = !install
+    update_attribute :install, valeur
+    
+  end
+  
+  def change_actif valeur = !actif
+    update_attribute :actif, valeur
   end
 end

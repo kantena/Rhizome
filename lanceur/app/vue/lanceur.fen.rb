@@ -1,4 +1,4 @@
-require 'java'
+
 
 
 include_class 'fen.Launcher' 

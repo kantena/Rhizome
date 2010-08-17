@@ -9,7 +9,7 @@ require 'java'
 #  include_class 'javax.swing.BoxLayout'
 
 
-  app =  javax::swing::JFrame.new
+  app =   javax.swing.JCheckBox.new 
   # scro = javax::swing::JScrollPane.new
   # scrp =  javax::swing::JPanel.new
 # 
@@ -25,13 +25,13 @@ require 'java'
  # scro.setViewportView scrp 
 # app.add scro
  # 
- base = []
+ $base = []
  app.methods.sort.inject(base) do |base, elm| 
  if !elm.include?("__") #&&
-     #elm.include?("") #&& 
+     elm.include?("add") #&& 
       # #elm.include?("add") && 
      # # elm.include?("_")
-      puts elm
+     $base elm
     end
  end
  app.exit
