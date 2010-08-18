@@ -13,7 +13,6 @@ class Module_dispo_vue < Module_dispo
   end
   
   def update modul
-    p "mise a jour du module" << modul.titre
     jtitre.set_text modul.titre
     jdescription.set_text modul.description 
     chb_activer.selected= modul.actif

@@ -71,10 +71,10 @@ class RhizomeModule < ActiveRecord::Base
   def after_save
     obs_change true
     notif_tous self
+    NavigationController.navigation.actifs_changes
   end
   
   def change_install
-    p install
     self.actif=false if install  
     self.install = !install
     self.save  

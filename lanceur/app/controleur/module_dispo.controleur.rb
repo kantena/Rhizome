@@ -6,7 +6,6 @@ class Module_dispo_controleur
   
   def click_installation modul
     modul.change_install
-    #modul.change_actif false
   end
   
   def click_activation modul
