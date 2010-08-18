@@ -13,16 +13,17 @@ class Module_dispo_vue < Module_dispo
   end
   
   def update modul
-    self.jtitre.set_text modul.titre
-    self.jdescription.set_text modul.description 
-    self.chb_activer.selected= modul.actif
+    p "mise a jour du module" << modul.titre
+    jtitre.set_text modul.titre
+    jdescription.set_text modul.description 
+    chb_activer.selected= modul.actif
     unless modul.install ==  nil
       if modul.install
         btn_install.set_text "Desinstaller"
       else
         btn_install.set_text "Installer"
       end
-      self.chb_activer.enabled=(modul.install)  
+      chb_activer.enabled=(modul.install)  
     end
   end
   

@@ -13,19 +13,59 @@ class RhizomeModule < ActiveRecord::Base
   named_scope :actifs, :conditions => {:actif, true}
   named_scope :presents
   
+#  def self.presents
+#    RhizomeModule.find(:all)    
+#  end
+  
   def self.distant *arg
     begin
-      RhizomeModule.bdd_connection 'distant'     
+      RhizomeModule.bdd_connection 'distant' 
+      retour = RhizomeModule.send(*arg)
     rescue
       puts "connection distante non effective"
     end
-    retour = RhizomeModule.send(*arg)
+    
     RhizomeModule.bdd_connection 'local'
+    
     retour
+  end
+
+  def distant *arg
+    begin
+      RhizomeModule.bdd_connection 'distant' 
+      retour = self.send(*arg)
+    rescue
+      puts "connection distante non effective"
+    end
+    
+    RhizomeModule.bdd_connection 'local'
+    
+    retour
+  end
+  def to_hash
+    ptihash={}
+    #ptihash[:actif]=false
+    #ptihash[:install]=false
+    ptihash[:titre]= self.titre
+    ptihash[:description]=self.description
+    ptihash[:action]=self.action
+    ptihash[:jar]=self.jar
+    ptihash[:dep]=self.dep
+    ptihash
   end
   
   def self.disponibles
-    RhizomeModule.distant :presents
+    liste = RhizomeModule.distant(:find, :all) 
+    locals = RhizomeModule.presents
+    unless liste.nil?
+      hash_locals = locals.map {|elt| elt.to_hash}
+      liste.each do |elt|
+        unless hash_locals.include?(elt.to_hash)
+          locals << elt
+        end
+      end
+    end
+    locals 
   end
   
   def after_save
@@ -33,14 +73,11 @@ class RhizomeModule < ActiveRecord::Base
     notif_tous self
   end
   
-  def change_install valeur = !install
-    if valeur
-      install= true
-    else
-      install= false
-      actif= false
-    end  
-    save  
+  def change_install
+    p install
+    self.actif=false if install  
+    self.install = !install
+    self.save  
   end
   
   def change_actif valeur = !actif

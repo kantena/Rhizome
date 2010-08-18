@@ -1,7 +1,7 @@
 class Module_dispo_controleur
   @@controleur = false
   def initialize 
-    @vue = Liste_module_dispo_Vue.new self, RhizomeModule.disponibles
+      @vue = Liste_module_dispo_Vue.new self, RhizomeModule.disponibles
   end
   
   def click_installation modul

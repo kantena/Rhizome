@@ -267,3 +267,12 @@ SELECT * FROM table [42102-140]
 08-17 12:15:25 jdbc[2]: SQLException
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM INFORMATION_SCHEMA."; expected "identifier"; SQL statement:
 SELECT * FROM INFORMATION_SCHEMA. [42001-140]
+08-18 14:21:56 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: NULL not allowed for column "ID"; SQL statement:
+INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, dep) VALUES(NULL, NULL, 0, 1, NULL, NULL, NULL) [90006-140]
+08-18 14:21:57 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: NULL not allowed for column "ID"; SQL statement:
+INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, dep) VALUES(NULL, NULL, 0, 1, NULL, NULL, NULL) [90006-140]
+08-18 14:21:58 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: NULL not allowed for column "ID"; SQL statement:
+INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, dep) VALUES(NULL, NULL, 0, 0, NULL, NULL, NULL) [90006-140]
