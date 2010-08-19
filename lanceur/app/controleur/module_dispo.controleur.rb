@@ -5,21 +5,21 @@ class Module_dispo_controleur
   end
   
   def click_installation modul
-    modul.change_install
+    modul.change_install    
   end
   
   def click_activation modul
     modul.change_actif
+    if modul.actif
+      Kernel.const_get(:Controleur_lanceur).controleur.update modul
+    end
   end
   
   def self.start
-
     unless @@controleur
     @@controleur = Module_dispo_controleur.new 
     return
     end
-
-    
   end
   
   def fermeture

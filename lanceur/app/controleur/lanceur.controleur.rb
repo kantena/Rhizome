@@ -2,11 +2,25 @@
 
 
 class Controleur_lanceur
-  # Implementer ici les action qui doivent etre traitées par le
-  # controleur. Si l'action retourne 'true', elle sera transmise
-  # automatiquement au modele pour exécuter les règles métiers.
+  
   def initialize vue
     @vue = vue
+    @@controleur = self
+  end
+
+  def self.controleur
+    @@controleur
+  end
+  
+  def update modul
+    if modul.actif
+      modul.add_obs self
+    else
+      modul.rm_obs self
+    end
+    actifs = RhizomeModule.actifs
+    @vue.affiche_liste_module actifs
+  
   end
 
   def btn_quitter_click

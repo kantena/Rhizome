@@ -16,21 +16,21 @@ module ObservableClasse
   # Delete +observer+ as an observer on this object. It will no longer receive
   # notifications.
   #
-  def rm_observer(observer)
+  def rm_obs(observer)
     @observer_paires.delete observer if defined? @observer_paires
   end
 
   #
   # Delete all observers associated with this object.
   #
-  def rm_observers
+  def rm_obss
     @observer_paires.clear if defined? @observer_paires
   end
 
   #
   # Return the number of observers associated with this object.
   #
-  def nb_observers
+  def nb_obss
     if defined? @observer_paires
       @observer_paires.size
     else

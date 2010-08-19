@@ -1,6 +1,15 @@
-RhizomeModule:
-  adapter:  'jdbc'
-  driver:  'org.h2.Driver'
-  url:  'jdbc:h2:lib/lanceur.db;create=true'
-  username:  'username de la base h2 locale'
-  password:  'mdp de la base h2 locale'
+  
+local:
+  adapter:          'jdbc'
+  driver:           'org.h2.Driver'
+  url:              'jdbc:h2:rhizome_local/base/lanceur.db'
+  username:         'login'
+  password:         'mdp'
+  
+distant:
+      adapter:      'mysql'
+      host:         'adresse de la base'
+      username:     'login'
+      password:     'mdp'
+      database:     'rhizome'
+

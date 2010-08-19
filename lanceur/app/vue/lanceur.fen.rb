@@ -11,16 +11,17 @@ class Fen_lanceur < Launcher
     super()
     self.visible = true
     @controleur = Controleur_lanceur.new(self )
+    modules_actif.each do |rhizette|
+      rhizette.add_obs @controleur
+    end
+    
     item_demarrer_quitter.add_action_listener { |evt| @controleur.btn_quitter_click}
     item_modules_liste_modules.add_action_listener { |evt| @controleur.btn_liste_modules_click}
 
     
     affiche_liste_module modules_actif
-    
-    
-    #jAjout2.add_action_listener { |e| micro_c.do_it! :plus2};
-    #jRetire3.add_action_listener { |e| micro_c.do_it! :moins3};
   end
+  
 
   def affiche_liste_module liste
     liste_modules = javax::swing::JPanel.new
