@@ -8,7 +8,7 @@ class Module_dispo_vue < Module_dispo
     super()
     @controleur = contro
     update modul
-    btn_install.add_action_listener { |evt| @controleur.click_installation modul}
+    btn_install.add_action_listener { |evt| @controleur.click_installation(modul, self) }
     chb_activer.add_action_listener { |evt| @controleur.click_activation modul}
   end
   

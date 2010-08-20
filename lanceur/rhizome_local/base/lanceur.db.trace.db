@@ -276,3 +276,12 @@ INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, de
 08-18 14:21:58 jdbc[2]: SQLException
 org.h2.jdbc.JdbcSQLException: NULL not allowed for column "ID"; SQL statement:
 INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, dep) VALUES(NULL, NULL, 0, 0, NULL, NULL, NULL) [90006-140]
+08-20 14:58:35 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "id"; SQL statement:
+DELETE FROM rhizome_modules WHERE (id IN ('id'))  [90021-140]
+08-20 14:58:52 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "id"; SQL statement:
+DELETE FROM rhizome_modules WHERE (id IN ('id'))  [90021-140]
+08-20 14:59:07 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "id"; SQL statement:
+DELETE FROM rhizome_modules WHERE (id IN ('id'))  [90021-140]

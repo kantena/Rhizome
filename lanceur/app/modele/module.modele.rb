@@ -38,30 +38,20 @@ class RhizomeModule < ActiveRecord::Base
   end
   
   def to_hash
+=begin     
     ptihash={}
     ptihash[:titre]= self.titre
     ptihash[:description]=self.description
     ptihash[:action]=self.action
     ptihash[:jar]=self.jar
     ptihash[:dep]=self.dep
-    ptihash
+    
+=end    
+ptihash = attributes
+ptihash.delete 'id'
+ptihash
+
   end
-  
-=begin  
- def self.disponibles
-    liste = RhizomeModule.distant(:find, :all) 
-    locals = RhizomeModule.presents
-    unless liste.nil?
-      hash_locals = locals.map {|elt| elt.to_hash}
-      liste.each do |elt|
-        unless hash_locals.include?(elt.to_hash)
-          locals << elt
-        end
-      end
-    end
-    locals 
-  end 
-=end 
 
   def self.disponibles
     locals = RhizomeModule.presents
@@ -69,14 +59,11 @@ class RhizomeModule < ActiveRecord::Base
     unless distants.nil?
     distants.each do |elt_dist|
       unless locals.map {|elt_loc| elt_loc.to_hash}.include?(elt_dist.to_hash)
-        a = RhizomeModule.new elt_dist.to_hash
-        a.install= true
-        a.actif= false
-        a.save
+        locals << RhizomeModule.create(elt_dist.to_hash) 
       end
     end
   end
-    RhizomeModule.presents
+    locals
   end
  
   def after_save
@@ -85,12 +72,8 @@ class RhizomeModule < ActiveRecord::Base
   end
   
   def change_install
-   
-      self.actif=false if install  
-      self.install = !install
-      self.save    
-
-  
+    update_attribute(:install, !install)
+    Controleur_lanceur.controleur.update self
   end
   
   def change_actif 
