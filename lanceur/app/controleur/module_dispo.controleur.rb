@@ -4,15 +4,16 @@ class Module_dispo_controleur
       @vue = Liste_module_dispo_Vue.new self, RhizomeModule.disponibles
   end
   
-  def click_installation modul, vue
+  def click_installation modul
     unless modul.install
       tmp = RhizomeModule.create(modul.to_hash)
-      tmp.add_obs vue
+      tmp.cpy_obs modul
+      tmp.change_install
+    else
+      modul.change_install 
+      modul.change_actif false      
       modul.delete
-      modul.rm_obss
-      modul = tmp
     end
-    modul.change_install    
   end
   
   def click_activation modul

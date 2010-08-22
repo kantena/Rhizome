@@ -73,4 +73,15 @@ module ObservableClasse
     end
   end
 
+  def cpy_obs modul
+    @observer_paires = modul.observer_paires
+  end
+  
+  #private
+  
+  def observer_paires
+    @observer_paires
+  end
+    
+  
 end

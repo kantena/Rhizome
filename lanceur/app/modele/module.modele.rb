@@ -76,8 +76,8 @@ ptihash
     Controleur_lanceur.controleur.update self
   end
   
-  def change_actif 
-    update_attribute :actif, !self.actif
+  def change_actif valeur = !self.actif
+    update_attribute :actif, valeur
   end
   
   def installation_locale
