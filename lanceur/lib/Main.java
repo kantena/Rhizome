@@ -1,3 +1,4 @@
+import 'lib/jruby-complete.jar'
 
 class Main {
 

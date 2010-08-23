@@ -40,25 +40,29 @@ class RhizomeModule < ActiveRecord::Base
   def to_hash  
     ptihash = attributes
     ptihash.delete 'id'
+    ptihash.delete 'install'
+    ptihash.delete 'actif'
     ptihash
   end
 
   def self.disponibles
     locals = RhizomeModule.presents
     distants = RhizomeModule.distant(:find, :all) 
+    retour = []
     unless distants.nil?
     distants.each do |elt_dist|
       unless locals.map {|elt_loc| elt_loc.to_hash}.include?(elt_dist.to_hash)
-        locals << RhizomeModule.create(elt_dist.to_hash) 
+        retour << RhizomeModule.create(elt_dist.to_hash) 
       end
     end
   end
-    locals
+  retour + locals
   end
  
   def after_save
     obs_change true
     notif_tous self
+    p attributes
   end
   
 
@@ -71,7 +75,7 @@ class RhizomeModule < ActiveRecord::Base
       self.save      
       self.destroy
       Module_dispo_controleur.update
-      attributes.include? Controleur_lanceur.controleur
+
       
     else
       tmp = RhizomeModule.create(self.to_hash)
@@ -79,12 +83,18 @@ class RhizomeModule < ActiveRecord::Base
       tmp.install= true
       tmp.actif= false
       tmp.save
-      tmp.installation_locale
+      #tmp.installation_locale
     end
+
+
   end
   
   def change_actif valeur = !self.actif
-    update_attribute :actif, valeur
+    self.actif= valeur
+    self.save
+    obs_change true
+    notif_tous self
+
   end
   
   def installation_locale

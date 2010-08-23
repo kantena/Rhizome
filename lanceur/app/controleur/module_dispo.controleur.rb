@@ -11,9 +11,9 @@ class Module_dispo_controleur
   
   def click_activation modul
     modul.change_actif
-    if modul.actif
+    #if modul.actif
       Controleur_lanceur.controleur.update modul
-    end
+    #end
   end
   
   def self.update

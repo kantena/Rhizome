@@ -40,14 +40,14 @@ require 'app/vue/liste_dispo.fen.rb'
 require 'app/vue/module_dispo.vue.rb'
 require 'app/vue/module_mini_vue.vue.rb'
 
-liste = RhizhomeModule.actifs
-begin
-  liste.each do |rhizette|
-    require File.join($HOME, 'modules', rhizette.jar[0..-5], rhizette.jar)
-    require '' << rhizette.jar << chemins.rb
-  end
-rescue
-end
+# liste = RhizhomeModule.actifs
+# begin
+  # liste.each do |rhizette|
+    # require File.join($HOME, 'modules', rhizette.jar[0..-5], rhizette.jar)
+    # require '' << rhizette.jar << chemins.rb
+  # end
+# rescue
+# end
 
 
 
