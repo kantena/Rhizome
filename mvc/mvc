@@ -68,7 +68,7 @@ else
       cp -R modules monbuild/lib
       cd monbuild
       rm -R app/vue/jar
-      javac -cp ./lib/jruby-complete.jar Main.java
+      javac -cp ../mvc/lib/jruby-complete.jar Main.java
       rm Main.java
 
       jar cvfm coucou.jar MANIFEST.MF *.rb *.class app/

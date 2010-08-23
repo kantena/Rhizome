@@ -24,14 +24,14 @@ class Module_dispo_vue < Module_dispo
     jdescription.set_text modul.description 
     chb_activer.selected= modul.actif
 
-    unless modul.install ==  nil
-      if modul.install
-        btn_install.set_text "Desinstaller"
-      else
-        btn_install.set_text "Installer"
-      end
-      chb_activer.enabled= modul.install  
+    #unless modul.install ==  nil
+    if modul.install
+      btn_install.set_text "Desinstaller"
+    else
+      btn_install.set_text "Installer"
     end
+    chb_activer.enabled= modul.install  
+    #end
   end
   
 end

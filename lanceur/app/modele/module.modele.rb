@@ -37,20 +37,10 @@ class RhizomeModule < ActiveRecord::Base
     retour
   end
   
-  def to_hash
-=begin     
-    ptihash={}
-    ptihash[:titre]= self.titre
-    ptihash[:description]=self.description
-    ptihash[:action]=self.action
-    ptihash[:jar]=self.jar
-    ptihash[:dep]=self.dep
-    
-=end    
-ptihash = attributes
-ptihash.delete 'id'
-ptihash
-
+  def to_hash  
+    ptihash = attributes
+    ptihash.delete 'id'
+    ptihash
   end
 
   def self.disponibles
@@ -71,9 +61,26 @@ ptihash
     notif_tous self
   end
   
+
+
+  
   def change_install
-    update_attribute(:install, !install)
-    Controleur_lanceur.controleur.update self
+    if self.install
+      self.install= false
+      self.actif= false
+      self.save      
+      self.destroy
+      Module_dispo_controleur.update
+      attributes.include? Controleur_lanceur.controleur
+      
+    else
+      tmp = RhizomeModule.create(self.to_hash)
+      tmp.cpy_obs self
+      tmp.install= true
+      tmp.actif= false
+      tmp.save
+      tmp.installation_locale
+    end
   end
   
   def change_actif valeur = !self.actif
@@ -83,11 +90,15 @@ ptihash
   def installation_locale
     require 'net/http'
     http = Net::HTTP.new('www.chez-andrei.fr')
-    fichier = File.new File.join($HOME, jar), 'w'
+    Dir.mkdir($HOME, 'modules', self.jar[0..-5])
+    rhiz_fic = File.join($HOME, 'modules', self.jar[0..-5], self.jar)
+    fichier = File.new rhiz_fic, 'w'
     fichier.write http.get('java/' << jar).read_body 
     fichier.close
     http.finish
-    require File.join($HOME, jar)
+    require rhiz_fic
+    File.syscopy File.join(self.jar[0..-5], 'lib', 'base.db'), File.join($HOME, 'base', self.jar[0..-5] << '.db')
+
     
 
 

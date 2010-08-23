@@ -1,0 +1,3 @@
+08-22 22:15:03 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Table "RHIZOME_MODULES" not found; SQL statement:
+SELECT * FROM rhizome_modules [42102-140]
