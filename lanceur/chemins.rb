@@ -25,7 +25,7 @@ end
 
 
 
-require 'yaml'
+#require 'yaml'
 require 'rubygems'
 gem 'activerecord-jdbc-adapter'
 require 'jdbc_adapter'
@@ -48,6 +48,4 @@ require 'app/vue/module_mini_vue.vue.rb'
   # end
 # rescue
 # end
-
-
 

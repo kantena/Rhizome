@@ -16,6 +16,7 @@
       <jar href="http://www.chez-andrei.fr/java/coucou.jar"/>
       <jar href="http://www.chez-andrei.fr/java/lib/jruby-complete.jar"/>
       <jar href="http://www.chez-andrei.fr/java/lib/rhizome.jar"/>
+      <jar href="http://www.chez-andrei.fr/java/lib/h2.jar"/>
     </resources>
   <application-desc main-class="Main" />
 </jnlp>

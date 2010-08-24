@@ -276,3 +276,6 @@ INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, de
 08-18 14:21:58 jdbc[2]: SQLException
 org.h2.jdbc.JdbcSQLException: NULL not allowed for column "ID"; SQL statement:
 INSERT INTO rhizome_modules (titre, jar, install, actif, action, description, dep) VALUES(NULL, NULL, 0, 0, NULL, NULL, NULL) [90006-140]
+08-24 12:04:32 jdbc[2]: SQLException
+org.h2.jdbc.JdbcSQLException: Table "TABLES" not found; SQL statement:
+SELECT * FROM tables [42102-140]
